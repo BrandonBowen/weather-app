@@ -5,14 +5,15 @@ This is a simple weather application that retrieves and caches weather forecasts
 
 ## Features
 - Fetches weather data based on an address.
-- Caches weather forecasts to reduce API calls.
+- Validates address input is correct format
+- Config driven cache for weather forecasts to reduce API calls.
 - Implements unit and integration testing for reliability.
 - Global exception handling. Can be further built on to improve user experience
 
 ## Technologies Used
 - **Java 17**
 - **Spring Boot**
-- **Gradle (Groovy DSL)**
+- **Gradle**
 - **JUnit & Mockito** (for unit testing)
 - **OpenWeatherMap API** (or any other weather API)
 
@@ -41,16 +42,18 @@ Ensure you have the following installed:
   ```sh
   curl -X GET "http://localhost:8080/weather"
   ```
+- Type a well formed address into the input field 
+- Press Submit
+- Should see relevant weather details like picture below
+
+![App Screenshot](assets/example.png)
+
 
 ## Testing
 Run unit tests with:
 ```sh
 ./gradlew test
 ```
-
----
-
-For any questions, feel free to reach out or open an issue in the repository!
 
 ## Road Map
 
@@ -64,3 +67,7 @@ For any questions, feel free to reach out or open an issue in the repository!
      - For a production level app, it's a good practice to wrap api calls in a retry wrapper because api calls are prone to occasional hiccups.
 
 - Make better use of bootstrap to design a prettier UI
+
+---
+
+For any questions, feel free to reach out or open an issue in the repository!
