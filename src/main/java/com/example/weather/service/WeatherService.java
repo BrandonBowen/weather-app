@@ -25,8 +25,8 @@ public class WeatherService {
     private CacheManager cacheManager;
     private final RestTemplate restTemplate;
 
-    public String getApiUrl(String zip) {
-        return String.format("%s?zip=%s,us&appid=%s&units=imperial", baseApiUrl, zip, apiKey);
+    public String getApiUrl(String zip, String country) {
+        return String.format("%s?zip=%s,%s&appid=%s&units=imperial", baseApiUrl, zip, country, apiKey);
     }
 
     @Autowired
@@ -37,7 +37,8 @@ public class WeatherService {
     
     
     public WeatherResponseWrapper getWeather(String country, String zipCode) {
-        String apiUrl = getApiUrl(zipCode);
+        String url = getApiUrl(zipCode, country);
+        System.out.println("URL: " + url);
         Cache weatherCache = cacheManager.getCache("weatherCache");
         // Check if the data is already cached
         WeatherResponse cachedResponse = weatherCache != null ? weatherCache.get(zipCode, WeatherResponse.class) : null;
@@ -48,7 +49,6 @@ public class WeatherService {
             response = cachedResponse;
         } else {
             // Fetch from API if not in cache
-            String url = String.format(apiUrl, zipCode, apiKey);
             try {
                 response = restTemplate.getForObject(url, WeatherResponse.class);
             } catch (HttpClientErrorException e) {
