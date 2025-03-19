@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Information</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Weather Information</h1>
+
+        <!-- <div th:replace="~{address-form :: form}"></div> -->
+
+        <!-- Weather Form -->
+        <form method="get" action="/weather">
+            <div class="form-group">                
+                <label for="address">Enter Address:</label>
+                <input type="text" id="address" name="address" class="form-control" 
+                th:value="${address}" 
+                placeholder="e.g., 6900 West Parmer Lane, Austin, TX 78727, US"
+                pattern="^.+,\s+.+,\s+[A-Z]{2}\s+\d{5},\s+[A-Z]{2}$"
+                title="Format: Street Address, City, State Code ZIP, Country Code (e.g., 6900 West Parmer Lane, Austin, TX 78727, US)">
+
+            </div>
+            <button type="submit" class="btn btn-primary">Get Weather</button>
+        </form>
+
+        <!-- Show error message if no address is entered -->
+        <div th:if="${error}">
+            <p class="text-danger" th:text="${error}"></p>
+        </div>
+
+        <!-- Display weather information only if "weather" attribute is present -->
+        <div th:if="${weather}">
+            <h2 class="mt-4">Weather for <span th:text="${weather.name}"></span></h2>
+            <p><strong>Temperature:</strong> <span th:text="${weather.main.temp}">25.0</span>°F</p>
+            <p><strong>Feels Like:</strong> <span th:text="${weather.main.feels_like}">20.0</span>°F</p>
+            <p><strong>High:</strong> <span th:text="${weather.main.temp_max}">30.0</span>°F</p>
+            <p><strong>Low:</strong> <span th:text="${weather.main.temp_min}">15.0</span>°F</p>
+            <p><strong>Weather:</strong> <span th:text="${weather.weather[0].description}">Clear sky</span></p>
+
+            <p><strong>Is Cached?:</strong> <span th:text="${isCached}">Unknown</span></p>
+        </div>
+    </div>
+</body>
+</html>
