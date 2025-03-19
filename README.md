@@ -25,7 +25,7 @@ Ensure you have the following installed:
 ## Setup & Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-username/weather-app.git
+   git clone https://github.com/BrandonBowen/weather-app.git
    cd weather-app
    ```
 2. Build the project:
