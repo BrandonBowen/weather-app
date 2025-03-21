@@ -51,7 +51,7 @@ class WeatherControllerTest {
                 .andExpect(view().name("weather"));
     }
 
-    // Weather view should be returned when an empty address is provided
+    // Weather view should be returned when an valid address is provided
     @Test
     void testGetWeather_withValidAddress() throws Exception {
         // Valid address that matches your parser's regex format
