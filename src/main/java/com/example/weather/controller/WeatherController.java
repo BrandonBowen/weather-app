@@ -28,6 +28,7 @@ public class WeatherController {
             return "weather";  // Only show the form
         }
 
+        // Validate Address format and extract country and zip code
         ParsedAddress parsedAddress = AddressParser.parseAddress(address);
         String country = parsedAddress.getCountry();
         String zipCode = parsedAddress.getZipCode();
